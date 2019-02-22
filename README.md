@@ -4,7 +4,7 @@ Include progress inside Makefile
 
 Test with following command: 
 
-```bash
+```sh
 python geninput.py
 
 make
