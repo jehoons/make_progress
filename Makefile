@@ -1,3 +1,9 @@
+# You can check the command list to make targets with following command: 
+# make all --no-print-directory -nrRf Makefile
+# 
+# check the number of commandas to be processed with following command: 
+# make all --no-print-directory -nrRf Makefile ECHO="COUNTTHIS" | grep -c "COUNTTHIS"
+
 ifneq ($(words $(MAKECMDGOALS)),1)
 .DEFAULT_GOAL = all
 %:
@@ -31,12 +37,13 @@ jobs:
 
 %.step1: %.inp
 	@$(ECHO) PROCESSING ... $@
-	@sleep 0.1
+	@sleep 0.2
 	@cp $< $@
 
 $(summary): $(target)
 	@$(ECHO) REDUCING ... $@
-	@sleep 0.1
+	@sleep 0.2
 	@cat $^ > $@
 
 endif
+
