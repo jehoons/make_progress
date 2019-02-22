@@ -10,7 +10,7 @@ T := $(shell $(MAKE) $(MAKECMDGOALS) --no-print-directory \
 
 N := x
 C = $(words $N)$(eval N := x $N)
-ECHO = echo "`expr "   [\`expr $C '*' 100 / $T\`" : '.*\(....\)$$'`%]"
+ECHO = echo "`expr "     [\`echo "scale=5;" $C '*' 100 / $T | bc -l \`" : '.*\(...........\)$$'`%]"
 endif
 
 .PHONY: all clean
@@ -20,29 +20,22 @@ target=$(source:.inp=.step1)
 summary=summary
 
 all: $(target) $(summary)
-	@$(ECHO) All done
+	@$(ECHO) ALL DONE
 
 clean:
 	@rm -f $(target) $(summary) 
 
+jobs:
+	@make all --no-print-directory -nrRf Makefile
+
 %.step1: %.inp
-	@$(ECHO) Processing ... $@
+	@$(ECHO) PROCESSING ... $@
 	@sleep 0.1
 	@cp $< $@
 
 $(summary): $(target)
-	@$(ECHO) Reducing ... $@
+	@$(ECHO) REDUCING ... $@
 	@sleep 0.1
 	@cat $^ > $@
-
-#target: a.c b.c c.c
-#	@$(ECHO) Linking $@
-#	@sleep 0.1
-#	@touch $@
-
-#%.c:
-#	@$(ECHO) Compiling $@
-#	@sleep 0.1
-#	@touch $@
 
 endif
