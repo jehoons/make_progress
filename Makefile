@@ -5,12 +5,13 @@ ifneq ($(words $(MAKECMDGOALS)),1)
 else
 ifndef ECHO
 T := $(shell $(MAKE) $(MAKECMDGOALS) --no-print-directory \
-      -nrRf $(firstword $(MAKEFILE_LIST)) \
-      ECHO="COUNTTHIS" | grep -c "COUNTTHIS")
+	-nrRf $(firstword $(MAKEFILE_LIST)) \
+	ECHO="COUNTTHIS" | grep -c "COUNTTHIS")
 
 N := x
 C = $(words $N)$(eval N := x $N)
-ECHO = echo "`expr "     [\`echo "scale=5;" $C '*' 100 / $T | bc -l \`" : '.*\(...........\)$$'`%]"
+ECHO = echo "`expr "     [\`echo "scale=5;" $C '*' 100 / $T \
+	| bc -l \`" : '.*\(...........\)$$'`%]"
 endif
 
 .PHONY: all clean
