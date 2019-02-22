@@ -1,6 +1,8 @@
-# make_progress
-Include progress inside Makefile
+# makefile
 
+Examples for makefile. 
+
+Include progress inside Makefile
 
 Test with following command: 
 
